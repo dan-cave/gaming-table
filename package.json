@@ -1,0 +1,34 @@
+{
+  "name": "gaming-table",
+  "version": "1.0.0",
+  "description": "Adds touch screen support and GM tools to FoundryVTT with hammerjs",
+  "main": "src/gaming-table.js",
+  "scripts": {
+    "build": "webpack --config ./webpack.config.js --mode production",
+    "dev": "webpack --config webpack.config.js --watch --mode development --devtool inline-cheap-module-source-map",
+    "test": "\"echo \\\"No tests lol\\\" && exit 1\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dan-cave/gaming-table.git"
+  },
+  "keywords": [
+    "FoundryVTT",
+    "hammerjs"
+  ],
+  "author": "Dan Lee <dan@danlee.dev>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dan-cave/gaming-table/issues"
+  },
+  "homepage": "https://github.com/dan-cave/gaming-table#readme",
+  "dependencies": {
+    "hammerjs": "^2.0.8"
+  },
+  "devDependencies": {
+    "css-loader": "^6.8.1",
+    "mini-css-extract-plugin": "^2.7.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}

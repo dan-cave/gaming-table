@@ -1,0 +1,35 @@
+{
+  "id": "gaming-table",
+  "title": "Gamming Table",
+  "description": "Adds touch screen support to FoundryVTT",
+  "authors": [
+    {
+      "name": "Dan Cave | Dan Lee",
+      "email": "dan@danlee.dev"
+    }
+  ],
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "11.302"
+  },
+  "scripts": [
+    "dist/gaming-table.js"
+  ],
+  "styles": [
+    "dist/gaming-table.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "url": "https://github.com/dan-cave/gaming-table",
+  "download": "https://github.com/Oromis/touch-vtt/releases/download/v1.11.0/touch-vtt-v1.11.0.zip",
+  "manifest": "https://raw.githubusercontent.com/Oromis/touch-vtt/main/module.json",
+  "license": "https://www.gnu.org/licenses/gpl-3.0.en.html",
+  "readme": "README.md",
+  "bugs": "https://github.com/Oromis/touch-vtt/issues"
+}
