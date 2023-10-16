@@ -22,12 +22,7 @@
     "url": "https://github.com/dan-cave/gaming-table/issues"
   },
   "homepage": "https://github.com/dan-cave/gaming-table#readme",
-  "dependencies": {
-    "hammerjs": "^2.0.8"
-  },
   "devDependencies": {
-    "css-loader": "^6.8.1",
-    "mini-css-extract-plugin": "^2.7.6",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
   }
