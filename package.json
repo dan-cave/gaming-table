@@ -13,8 +13,7 @@
     "url": "git+https://github.com/dan-cave/gaming-table.git"
   },
   "keywords": [
-    "FoundryVTT",
-    "hammerjs"
+    "FoundryVTT"
   ],
   "author": "Dan Lee <dan@danlee.dev>",
   "license": "ISC",
