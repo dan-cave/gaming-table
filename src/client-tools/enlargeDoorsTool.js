@@ -1,4 +1,4 @@
-import { MODULE_NAME } from "../settings";
+import { MODULE_NAME, LARGE_DOORS_SETTING } from "../settings";
 
 const repositionOverride = function () {
   let pos = this.wall.midpoint.map(p => p - 30);
@@ -40,6 +40,8 @@ const drawOverride = function () {
 };
 
 export default () => {
-  libWrapper.register(MODULE_NAME, 'DoorControl.prototype.draw', drawOverride, 'OVERRIDE');
-  libWrapper.register(MODULE_NAME, 'DoorControl.prototype.reposition', repositionOverride, 'OVERRIDE');
+  if (game.settings.get(MODULE_NAME, LARGE_DOORS_SETTING)) {
+    libWrapper.register(MODULE_NAME, 'DoorControl.prototype.draw', drawOverride, 'OVERRIDE');
+    libWrapper.register(MODULE_NAME, 'DoorControl.prototype.reposition', repositionOverride, 'OVERRIDE');
+  }
 }

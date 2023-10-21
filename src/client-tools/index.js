@@ -1,13 +1,16 @@
-import { MODULE_DISPLAY_NAME } from "../settings";
+import { MODULE_NAME, MODULE_DISPLAY_NAME } from "../settings";
 import initEnlargeButtonTool from "./enlargeButtonsTool";
 import initEnlargeDoorsTool from './enlargeDoorsTool';
-import { installDrawingToolsControls, installMeasurementTemplateEraser } from './eraserTools';
-import { findCanvas, WindowHeaderTouchToMouseAdapter, CanvasTouchToMouseAdapter, touchHooks } from './touchSettings';
+import initDisableCharacterSheets from './disableCharacterSheets';
+import { installDrawingToolsControls, installMeasurementTemplateEraser, initEraserTools } from './eraserTools';
+import { findCanvas, WindowHeaderTouchToMouseAdapter, CanvasTouchToMouseAdapter, touchWrappers } from './touchSettings';
 
 export const initClientTools = () => {
   Hooks.once('init', async () => {
+    initDisableCharacterSheets();
     initEnlargeDoorsTool();
-    await initEnlargeButtonTool();
+    initEnlargeButtonTool();
+    initEraserTools();
   });
 
   Hooks.on('getSceneControlButtons', (controls) => {
@@ -21,7 +24,7 @@ export const initClientTools = () => {
       if (canvas) {
         const canvasTouchToMouseAdapter = CanvasTouchToMouseAdapter.init(canvas);
         WindowHeaderTouchToMouseAdapter.init(document.body);
-        touchHooks(canvasTouchToMouseAdapter);
+        touchWrappers(canvasTouchToMouseAdapter);
       } else {
         console.warn(`Failed to find canvas element. ${MODULE_DISPLAY_NAME} touch settings will not be available.`)
       }
@@ -29,7 +32,17 @@ export const initClientTools = () => {
       console.error(`Failed to initialize ${MODULE_DISPLAY_NAME} touch settings: `, e)
     }
   })
-  
-};
+
+  Hooks.on(`${MODULE_NAME}.longTouch`, () => {
+    if (ui.controls.activeControl !== "tokens") {
+      canvas["tokens"].activate();
+    }
+    if (ui.controls.activeTool === "select") {
+      ui.controls.initialize({tool: "ruler" });
+    } else {
+      ui.controls.initialize({tool: "select" });
+    }
+  });
+}
 
 export default initClientTools;
