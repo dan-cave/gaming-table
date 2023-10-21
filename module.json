@@ -1,7 +1,7 @@
 {
   "id": "gaming-table",
   "title": "Gaming Table",
-  "description": "Adds touch screen support to FoundryVTT for my terrible setup",
+  "description": "Adds touch screen support to FoundryVTT that makes my terrible TV and IR Frame setup bearable",
   "authors": [
     {
       "name": "Dan Cave | Dan Lee",
@@ -23,20 +23,22 @@
       "path": "lang/en.json"
     }
   ],
-  "dependencies": [
-    {
-      "name": "settings-extender",
-      "type": "module"
-    },
-    {
-      "id": "lib-wrapper",
-      "type": "module",
-      "compatibility": {
-          "minimum": "1.0.0.0",
-          "verified": "1.12.6.0"
+  "relationships": {
+    "requires": [
+      {
+        "id": "settings-extender",
+        "type": "module"
+      },
+      {
+        "id": "lib-wrapper",
+        "type": "module",
+        "compatibility": {
+            "minimum": "1.0.0.0",
+            "verified": "1.12.6.0"
+        }
       }
-    }
-  ],
+    ]
+  },
   "socket": true,
   "url": "https://github.com/dan-cave/gaming-table",
   "download": "https://github.com/Oromis/touch-vtt/releases/download/v1.11.0/touch-vtt-v1.11.0.zip",
