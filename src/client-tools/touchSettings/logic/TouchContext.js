@@ -1,4 +1,8 @@
-import MouseButton from './MouseButton.js'
+const MouseButton = Object.freeze({
+  left: 0,
+  right: 2
+})
+
 
 class TouchContext {
   constructor({ name, forwardingEvents = [], mouseButton = null, isFinal = true } = {}) {

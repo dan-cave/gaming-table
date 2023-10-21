@@ -1,5 +1,5 @@
+import { MODULE_NAME, LONG_TOUCH_TIMEOUT, LONG_TOUCH_TOGGLE } from '../../../settings';
 import TouchToMouseAdapter from './TouchToMouseAdapter'
-import Vectors from './Vectors'
 
 class CanvasTouchToMouseAdapter extends TouchToMouseAdapter {
   constructor(canvas) {
@@ -8,9 +8,12 @@ class CanvasTouchToMouseAdapter extends TouchToMouseAdapter {
     this.lastTouchTime = 0;
     this.inTimeout = false;
     this.timeoutTime = 300;
+    this.longPressTimeout = null;
+    this.longPressTimeoutTime = game.settings.get(MODULE_NAME, LONG_TOUCH_TIMEOUT) || 500;
   }
   
   handleTouchEnd(event) {
+    clearTimeout(this.longPressTimeout);
     this.touchCount++;
     if (!this.inTimeout) {
       this.inTimeout = true;
@@ -31,7 +34,19 @@ class CanvasTouchToMouseAdapter extends TouchToMouseAdapter {
     this.cleanUpTouches(event);
   }
 
+  handleTouchStart(event) {
+    if (game.settings.get(MODULE_NAME, LONG_TOUCH_TOGGLE)) {
+      this.longPressTimeout = setTimeout(() => {
+        Hooks.call(`${MODULE_NAME}.longTouch`);
+      }, this.longPressTimeoutTime);
+    }
+    
+    this.updateActiveTouches(event);
+    this.forwardTouches(event);
+  }
+
   handleTouchMove(event) {
+    clearTimeout(this.longPressTimeout);
     this.clearTouchCount();
 
     this.updateActiveTouches(event);

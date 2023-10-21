@@ -1,6 +1,6 @@
 import CanvasTouchToMouseAdapter from './logic/CanvasTouchToMouseAdapter'
 import WindowHeaderTouchToMouseAdapter from './logic/WindowHeaderTouchToMouseAdapter'
 import { findCanvas } from './utils'
-import touchHooks from './hooks';
+import touchWrappers from './wrappers';
 
-export { CanvasTouchToMouseAdapter, WindowHeaderTouchToMouseAdapter, findCanvas, touchHooks };
+export { CanvasTouchToMouseAdapter, WindowHeaderTouchToMouseAdapter, findCanvas, touchWrappers };
