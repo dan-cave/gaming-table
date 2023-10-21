@@ -1,4 +1,20 @@
 {
-  "GAMINGTABLE.Erase": "Erase",
-  "TOUCHVTT.DeleteDrawing": "Delete Selected Drawing"
+  "gamingtable.settings.largeButtons.name": "Enlarge buttons in on-screen UI",
+  "gamingtable.settings.largeButtons.hint": "Increases the size of menu bar buttons to make them easier to use with touch controls",
+  "gamingtable.settings.largeDoors.name": "Enlarge doors for the TV client",
+  "gamingtable.settings.largeDoors.hint": "Increases the size of door icons to make them easier to use with touch controls",
+  "gamingtable.settings.characterSheets.name": "Disable character sheets on double click",
+  "gamingtable.settings.characterSheets.hint": "Prevents the client from being able to open character sheets by double clicking",
+  "gamingtable.settings.pullFocusPlayer.name": "Gaming Table's Player Name",
+  "gamingtable.settings.pullFocusPlayer.hint": "The user name of the player who's session is being displayed on the gaming table",
+  "gamingtable.settings.pullFocusPanSpeed.name":  "Pan Duration (in MS)",
+  "gamingtable.settings.pullFocusPanSpeed.hint": "How fast or slow to transition to focus point. (1000ms = 1 second)",
+  "gamingtable.settings.pullFocusKeyBind.name":  "Pull Focus Key",
+  "gamingtable.settings.pullFocusKeyBind.hint": "Enter the key used to pull focus on the gaming table",
+  "gamingtable.settings.longTouchTimeout.name":  "Long Touch Timeout (in MS)",
+  "gamingtable.settings.longTouchTimeout.hint": "How long to require a touch depression before registering a long click. (1000ms = 1 second). 500 will sync with stock ping animation",
+  "gamingtable.settings.longTouchToggle.name":  "Toggle Tools On Longpress",
+  "gamingtable.settings.longTouchToggle.hint": "Toggles select and ruler tool on longpress",
+  "gamingtable.tools.eraseTemplate": "Erase Selected Template",
+  "gamingtable.tools.eraseDrawing": "Erase Selected Drawing"
 }
