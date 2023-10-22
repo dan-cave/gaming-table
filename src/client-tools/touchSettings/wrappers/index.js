@@ -11,21 +11,4 @@ export default (canvasTouchToMouseAdapter) => {
     canvasTouchToMouseAdapter.clearTouchCount();
     return wrapped(...args);
   }, 'WRAPPER');
-
-  // This wrapper handles pings and toggling select/
-
-  libWrapper.register(MODULE_NAME, 'SceneControls.prototype.activateListeners', function (wrapped, ...args) {
-    Hooks.on(`${MODULE_NAME}.longTouch`, () => {
-      if (ui.controls.activeControl !== "tokens") {
-        canvas.tokens.activate();
-      }
-      if (ui.controls.activeTool === "select") {
-        ui.controls.initialize({tool: "ruler" });
-      } else {
-        ui.controls.initialize({tool: "select" });
-      }
-    });
-    return wrapped(...args);
-  }, 'WRAPPER');
-
 }
