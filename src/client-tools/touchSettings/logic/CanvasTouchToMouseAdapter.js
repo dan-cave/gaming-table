@@ -1,4 +1,4 @@
-import { MODULE_NAME, LONG_TOUCH_TIMEOUT, LONG_TOUCH_TOGGLE } from '../../../settings';
+import { MODULE_NAME, LONG_TOUCH_TIMEOUT, LONG_TOUCH_TOGGLE, ZOOM_VALUE } from '../../../settings';
 import TouchToMouseAdapter from './TouchToMouseAdapter'
 
 class CanvasTouchToMouseAdapter extends TouchToMouseAdapter {
@@ -10,6 +10,7 @@ class CanvasTouchToMouseAdapter extends TouchToMouseAdapter {
     this.timeoutTime = 300;
     this.longPressTimeout = null;
     this.longPressTimeoutTime = game.settings.get(MODULE_NAME, LONG_TOUCH_TIMEOUT) || 500;
+    this.zoomValue = game.settings.get(MODULE_NAME, ZOOM_VALUE) || 0.25;
   }
   
   handleTouchEnd(event) {
@@ -62,7 +63,7 @@ class CanvasTouchToMouseAdapter extends TouchToMouseAdapter {
   
   zoomPan(sign) {
       let touch = canvas.mousePosition;
-      touch.scale = canvas.stage.scale._x + sign * 0.25;
+      touch.scale = canvas.stage.scale._x + sign * this.zoomValue;
       touch.duration = 250;
 			canvas.animatePan(touch);
   }

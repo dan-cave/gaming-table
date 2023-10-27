@@ -15,6 +15,8 @@
   "gamingtable.settings.longTouchTimeout.hint": "How long to require a touch depression before registering a long click. (1000ms = 1 second). 500 will sync with stock ping animation",
   "gamingtable.settings.longTouchToggle.name":  "Toggle Tools On Longpress",
   "gamingtable.settings.longTouchToggle.hint": "Toggles select and ruler tool on longpress",
+  "gamingtable.settings.zoomValue.name":  "Zoom Intensity Modifier",
+  "gamingtable.settings.zoomValue.hint": "Increase or decrease this value to zoom more or less on triple/quad clicking (Default 0.25)",
   "gamingtable.tools.eraseTemplate": "Erase Selected Template",
   "gamingtable.tools.eraseDrawing": "Erase Selected Drawing"
 }

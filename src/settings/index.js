@@ -8,7 +8,8 @@ import {
   PULL_FOCUS_PAN_SPEED, 
   PULL_FOCUS_PLAYER,
   LONG_TOUCH_TIMEOUT,
-  LONG_TOUCH_TOGGLE } from './settings';
+  LONG_TOUCH_TOGGLE,
+  ZOOM_VALUE } from './settings';
 
 export {
   MODULE_DISPLAY_NAME,
@@ -21,7 +22,8 @@ export {
   LARGE_DOORS_SETTING,
   CHARACTER_SHEET_SETTING,
   LONG_TOUCH_TIMEOUT,
-  LONG_TOUCH_TOGGLE, 
+  LONG_TOUCH_TOGGLE,
+  ZOOM_VALUE,
   registerSettings
 };
 

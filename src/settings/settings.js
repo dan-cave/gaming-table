@@ -1,10 +1,6 @@
 import { MODULE_NAME } from './constants';
 import enlargeButtons from '../client-tools/enlargeButtonsTool';
 
-export const GESTURE_MODE_SETTING = "gestureMode";
-export const GESTURE_MODE_COMBINED = "combined";
-export const GESTURE_MODE_SPLIT = "split";
-
 export const LARGE_BUTTONS_SETTING = "largeButtons";
 
 export const LARGE_DOORS_SETTING = "largeDoors";
@@ -20,7 +16,7 @@ export const LONG_TOUCH_TIMEOUT = "longTouchTimeout";
 
 export const LONG_TOUCH_TOGGLE = "longTouchToggle";
 
-const debouncedReload = foundry.utils.debounce(() => window.location.reload(), 100);
+export const ZOOM_VALUE = "zoomValue";
 
 export function registerSettings() {
   game.settings.register(MODULE_NAME, LARGE_BUTTONS_SETTING, {
@@ -85,6 +81,14 @@ export function registerSettings() {
     hint: game.i18n.localize("gamingtable.settings.longTouchTimeout.hint"),
     scope: "world",
     default: 500,
+    type: Number,
+    config: true,
+  });
+  game.settings.register(MODULE_NAME, ZOOM_VALUE, {
+    name: game.i18n.localize("gamingtable.settings.zoomValue.name"),
+    hint: game.i18n.localize("gamingtable.settings.zoomValue.hint"),
+    scope: "world",
+    default: 0.25,
     type: Number,
     config: true,
   });
