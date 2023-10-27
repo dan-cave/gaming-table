@@ -41,7 +41,7 @@
   },
   "socket": true,
   "url": "https://github.com/dan-cave/gaming-table",
-  "download": "https://github.com/dan-cave/gaming-table/releases/download/v1.0.0/gaming-table-v1.0.0.zip",
+  "download": "https://github.com/dan-cave/gaming-table/releases/download/v1.1.0/gaming-table-v1.1.0.zip",
   "manifest": "https://raw.githubusercontent.com/dan-cave/gaming-table/master/module.json",
   "license": "https://www.gnu.org/licenses/gpl-3.0.en.html",
   "readme": "https://raw.githubusercontent.com/dan-cave/gaming-table/master/Readme.md",
