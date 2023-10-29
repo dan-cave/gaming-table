@@ -1,6 +1,15 @@
 import CanvasTouchToMouseAdapter from './logic/CanvasTouchToMouseAdapter'
 import WindowHeaderTouchToMouseAdapter from './logic/WindowHeaderTouchToMouseAdapter'
+import CustomMouseInteractionManager, { canvasCallbacks } from './logic/CustomMouseInteractionManager';
 import { findCanvas } from './utils'
-import touchWrappers from './wrappers';
+import { initTouchWrapper, canvasTouchWrapper } from './wrappers';
 
-export { CanvasTouchToMouseAdapter, WindowHeaderTouchToMouseAdapter, findCanvas, touchWrappers };
+export { 
+  CanvasTouchToMouseAdapter, 
+  WindowHeaderTouchToMouseAdapter, 
+  CustomMouseInteractionManager, 
+  canvasCallbacks, 
+  findCanvas, 
+  initTouchWrapper,
+  canvasTouchWrapper
+};
