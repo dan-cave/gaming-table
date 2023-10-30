@@ -2,7 +2,7 @@ import { MODULE_NAME } from "../../../settings";
 import CustomMouseInteractionManager from "../logic/CustomMouseInteractionManager";
 
 
-// These hooks are here to prevent accidental panning when selecting a character to move, or when opening a door.
+// These hooks are here to prevent accidental panning when opening a door.
 export const canvasTouchWrapper = (canvasTouchToMouseAdapter) => {
 
   libWrapper.register(MODULE_NAME, 'DoorControl.prototype._onMouseDown', function (wrapped, ...args) {
