@@ -16,7 +16,9 @@
   "gamingtable.settings.longTouchToggle.name":  "Toggle Tools On Longpress",
   "gamingtable.settings.longTouchToggle.hint": "Toggles select and ruler tool on longpress",
   "gamingtable.settings.zoomValue.name":  "Zoom Intensity Modifier",
-  "gamingtable.settings.zoomValue.hint": "Increase or decrease this value to zoom more or less on triple/quad clicking (Default 0.25)",
+  "gamingtable.settings.zoomValue.hint": "Increase or decrease this value to zoom more or less on triple/quad clicking (Default 0.50)",
+  "gamingtable.settings.toolScale.name":  "Control/Tool button Size",
+  "gamingtable.settings.toolScale.hint": "This value controls the size of the control/tool buttons when enlarged in px (default 100px)",
   "gamingtable.tools.eraseTemplate": "Erase Selected Template",
   "gamingtable.tools.eraseDrawing": "Erase Selected Drawing"
 }

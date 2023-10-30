@@ -42,10 +42,10 @@ export const initClientTools = () => {
   });
 
   Hooks.on(`${MODULE_NAME}.longTouch`, () => {
-    if (ui.controls.activeControl !== "tokens") {
+    if (ui.controls.activeControl !== "token") {
       canvas["tokens"].activate();
-    }
-    if (ui.controls.activeTool === "select") {
+      ui.controls.initialize({tool: "select" });
+    } else if (ui.controls.activeControl === "token" && ui.controls.activeTool === "select") {
       ui.controls.initialize({tool: "ruler" });
     } else {
       ui.controls.initialize({tool: "select" });

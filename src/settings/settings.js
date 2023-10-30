@@ -18,6 +18,8 @@ export const LONG_TOUCH_TOGGLE = "longTouchToggle";
 
 export const ZOOM_VALUE = "zoomValue";
 
+export const BUTTON_SCALE_PX = "buttonScalepx";
+
 export function registerSettings() {
   game.settings.register(MODULE_NAME, LARGE_BUTTONS_SETTING, {
     name: game.i18n.localize("gamingtable.settings.largeButtons.name"),
@@ -88,8 +90,16 @@ export function registerSettings() {
     name: game.i18n.localize("gamingtable.settings.zoomValue.name"),
     hint: game.i18n.localize("gamingtable.settings.zoomValue.hint"),
     scope: "world",
-    default: 0.25,
+    default: 0.50,
     type: Number,
     config: true,
   });
+  game.settings.register(MODULE_NAME, BUTTON_SCALE_PX, {
+    name: game.i18n.localize("gamingtable.settings.toolScale.name"),
+    hint: game.i18n.localize("gamingtable.settings.toolScale.hint"),
+    scope: "client",
+    default: 100,
+    type: Number,
+    config: true,
+  })
 }

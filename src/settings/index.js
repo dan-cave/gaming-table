@@ -9,7 +9,8 @@ import {
   PULL_FOCUS_PLAYER,
   LONG_TOUCH_TIMEOUT,
   LONG_TOUCH_TOGGLE,
-  ZOOM_VALUE } from './settings';
+  ZOOM_VALUE,
+  BUTTON_SCALE_PX } from './settings';
 
 export {
   MODULE_DISPLAY_NAME,
@@ -24,6 +25,7 @@ export {
   LONG_TOUCH_TIMEOUT,
   LONG_TOUCH_TOGGLE,
   ZOOM_VALUE,
+  BUTTON_SCALE_PX,
   registerSettings
 };
 
