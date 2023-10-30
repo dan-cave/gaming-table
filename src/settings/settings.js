@@ -1,5 +1,5 @@
-import { MODULE_NAME } from './constants';
-import enlargeButtons from '../client-tools/enlargeButtonsTool';
+import { MODULE_NAME } from "./constants";
+import enlargeButtons from "../client-tools/enlargeButtonsTool";
 
 export const LARGE_BUTTONS_SETTING = "largeButtons";
 
@@ -10,7 +10,7 @@ export const CHARACTER_SHEET_SETTING = "characterSheet";
 export const PULL_FOCUS_PLAYER = "player";
 export const PULL_FOCUS_PAN_SPEED = "panspeed";
 export const PULL_FOCUS_KEYBIND = "keybind";
-export const PULL_FOCUS_INTERVAL_SPEED = "intervalspeed"
+export const PULL_FOCUS_INTERVAL_SPEED = "intervalspeed";
 
 export const LONG_TOUCH_TIMEOUT = "longTouchTimeout";
 
@@ -28,7 +28,7 @@ export function registerSettings() {
     config: true,
     type: Boolean,
     default: false,
-    onChange: enabled => enlargeButtons(enabled),
+    onChange: (enabled) => enlargeButtons(enabled),
   });
   game.settings.register(MODULE_NAME, LARGE_DOORS_SETTING, {
     name: game.i18n.localize("gamingtable.settings.largeDoors.name"),
@@ -60,7 +60,7 @@ export function registerSettings() {
     scope: "world",
     default: "VTT",
     type: String,
-    config: true
+    config: true,
   });
   game.settings.register(MODULE_NAME, PULL_FOCUS_PAN_SPEED, {
     name: game.i18n.localize("gamingtable.settings.pullFocusPanSpeed.name"),
@@ -68,7 +68,7 @@ export function registerSettings() {
     scope: "world",
     default: 250,
     type: Number,
-    config: true
+    config: true,
   });
   game.settings.register(MODULE_NAME, PULL_FOCUS_KEYBIND, {
     name: game.i18n.localize("gamingtable.settings.pullFocusKeyBind.name"),
@@ -76,7 +76,7 @@ export function registerSettings() {
     scope: "world",
     default: "t",
     type: window.Azzu.SettingsTypes.KeyBinding,
-    config: true
+    config: true,
   });
   game.settings.register(MODULE_NAME, LONG_TOUCH_TIMEOUT, {
     name: game.i18n.localize("gamingtable.settings.longTouchTimeout.name"),
@@ -90,7 +90,7 @@ export function registerSettings() {
     name: game.i18n.localize("gamingtable.settings.zoomValue.name"),
     hint: game.i18n.localize("gamingtable.settings.zoomValue.hint"),
     scope: "world",
-    default: 0.50,
+    default: 0.5,
     type: Number,
     config: true,
   });
@@ -101,5 +101,5 @@ export function registerSettings() {
     default: 100,
     type: Number,
     config: true,
-  })
+  });
 }

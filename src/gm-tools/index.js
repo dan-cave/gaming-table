@@ -1,11 +1,11 @@
-import { init, gmInit } from './pullFocusTool';
+import { init, gmInit } from "./pullFocusTool";
 
 export const initGmTools = () => {
-  Hooks.on('ready',()=>{
+  Hooks.on("ready", () => {
     init();
   });
-  
-  Hooks.on('canvasReady', ()=>{
+
+  Hooks.on("canvasReady", () => {
     gmInit();
   });
 };

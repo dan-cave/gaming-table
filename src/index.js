@@ -1,8 +1,8 @@
-import initClientTools from './client-tools';
-import initGmTools from './gm-tools';
-import registerSettings from './settings';
+import initClientTools from "./client-tools";
+import initGmTools from "./gm-tools";
+import registerSettings from "./settings";
 
-Hooks.on('init', () => {
+Hooks.on("init", () => {
   registerSettings();
 });
 

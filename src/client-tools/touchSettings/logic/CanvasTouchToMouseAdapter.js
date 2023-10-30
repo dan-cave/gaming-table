@@ -1,5 +1,10 @@
-import { MODULE_NAME, LONG_TOUCH_TIMEOUT, LONG_TOUCH_TOGGLE, ZOOM_VALUE } from '../../../settings';
-import TouchToMouseAdapter from './TouchToMouseAdapter'
+import {
+  MODULE_NAME,
+  LONG_TOUCH_TIMEOUT,
+  LONG_TOUCH_TOGGLE,
+  ZOOM_VALUE,
+} from "../../../settings";
+import TouchToMouseAdapter from "./TouchToMouseAdapter";
 
 class CanvasTouchToMouseAdapter extends TouchToMouseAdapter {
   constructor(canvas) {
@@ -10,10 +15,11 @@ class CanvasTouchToMouseAdapter extends TouchToMouseAdapter {
     this.inTimeout = false;
     this.timeoutTime = 300;
     this.longPressTimeout = null;
-    this.longPressTimeoutTime = game.settings.get(MODULE_NAME, LONG_TOUCH_TIMEOUT) || 500;
+    this.longPressTimeoutTime =
+      game.settings.get(MODULE_NAME, LONG_TOUCH_TIMEOUT) || 500;
     this.zoomValue = game.settings.get(MODULE_NAME, ZOOM_VALUE) || 0.25;
   }
-  
+
   handleTouchEnd(event) {
     clearTimeout(this.longPressTimeout);
     this.touchCount++;
@@ -42,7 +48,7 @@ class CanvasTouchToMouseAdapter extends TouchToMouseAdapter {
         Hooks.call(`${MODULE_NAME}.longTouch`);
       }, this.longPressTimeoutTime);
     }
-    
+
     this.updateActiveTouches(event);
     this.forwardTouches(event);
   }
@@ -61,23 +67,23 @@ class CanvasTouchToMouseAdapter extends TouchToMouseAdapter {
     touch.duration = 250;
     canvas.animatePan(touch);
   }
-  
+
   zoomPan(sign) {
-      let touch = canvas.mousePosition;
-      touch.scale = canvas.stage.scale._x + sign * this.zoomValue;
-      touch.duration = 250;
-			canvas.animatePan(touch);
+    let touch = canvas.mousePosition;
+    touch.scale = canvas.stage.scale._x + sign * this.zoomValue;
+    touch.duration = 250;
+    canvas.animatePan(touch);
   }
 
   getEventMap() {
     return {
       // First simulate that the pointer moves to the specified location, then simulate the down event.
       // Foundry won't take the "click" on the first try otherwise.
-      pointerdown: ['pointermove', 'pointerdown'],
-      pointermove: ['pointermove'],
-      pointerup: ['pointerup'],
-      pointercancel: ['pointercancel'],
-    }
+      pointerdown: ["pointermove", "pointerdown"],
+      pointermove: ["pointermove"],
+      pointerup: ["pointerup"],
+      pointercancel: ["pointercancel"],
+    };
   }
 
   clearTouchCount() {
@@ -86,7 +92,7 @@ class CanvasTouchToMouseAdapter extends TouchToMouseAdapter {
 }
 
 CanvasTouchToMouseAdapter.init = function init(canvas) {
-  return new CanvasTouchToMouseAdapter(canvas)
-}
+  return new CanvasTouchToMouseAdapter(canvas);
+};
 
-export default CanvasTouchToMouseAdapter
+export default CanvasTouchToMouseAdapter;

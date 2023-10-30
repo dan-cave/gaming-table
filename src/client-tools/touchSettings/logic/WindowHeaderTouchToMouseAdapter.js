@@ -1,8 +1,8 @@
-import TouchToMouseAdapter from './TouchToMouseAdapter'
+import TouchToMouseAdapter from "./TouchToMouseAdapter";
 
-const START_EVENT = 'touchstart'
-const MOVE_EVENT = 'touchmove'
-const END_EVENT = 'touchend'
+const START_EVENT = "touchstart";
+const MOVE_EVENT = "touchmove";
+const END_EVENT = "touchend";
 
 class WindowHeaderTouchToMouseAdapter extends TouchToMouseAdapter {
   constructor(element) {
@@ -14,7 +14,7 @@ class WindowHeaderTouchToMouseAdapter extends TouchToMouseAdapter {
 
   getEventTarget(event) {
     if (event.type === START_EVENT) {
-      return this.getParentByClass(event.target, 'window-header');
+      return this.getParentByClass(event.target, "window-header");
     } else {
       return window;
     }
@@ -36,14 +36,14 @@ class WindowHeaderTouchToMouseAdapter extends TouchToMouseAdapter {
   }
 
   isInWindowTitle(element) {
-    return this.getParentByClass(element, 'window-title') != null;
+    return this.getParentByClass(element, "window-title") != null;
   }
 
   getEventMap() {
     return {
-      [START_EVENT]: ['mousedown'],
-      [MOVE_EVENT]: ['mousemove'],
-      [END_EVENT]: ['mouseup'],
+      [START_EVENT]: ["mousedown"],
+      [MOVE_EVENT]: ["mousemove"],
+      [END_EVENT]: ["mouseup"],
     };
   }
 
@@ -60,6 +60,6 @@ class WindowHeaderTouchToMouseAdapter extends TouchToMouseAdapter {
 
 WindowHeaderTouchToMouseAdapter.init = function init(element) {
   return new WindowHeaderTouchToMouseAdapter(element);
-}
+};
 
 export default WindowHeaderTouchToMouseAdapter;

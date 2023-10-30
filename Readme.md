@@ -1,13 +1,13 @@
 # Gaming Table
 
-
-## What is this? 
+## What is this?
 
 This is a hacked together group of modules I've used to enable foundry gameplay using a gaming table hacked together with an IR Touch Frame glued to a shitty 42 inch television with half of an old gaming laptop duct taped to the back of it. My players use paper character sheets and roll physical dice, so this allows the GM to make use of foundry while giving the players an interactive map to move tokens around on. My players rarely use any functionality other than moving tokens, opening doors, and drawing templates.
 
 ## What modules are you ripping off?
 
 Thank you for asking. This module is a mash up of pared down code from the following fantastic, complete modules:
+
 - [TouchVTT](https://foundryvtt.com/packages/touch-vtt/)
   - I've ripped out the majority of this module, except for the framework that handles the basic touch event support.
   - Pan and Zoom are now handled by double clicking (for pan), triple clicking (for zoom in), and quad clicking (for zoom out). Pinching and swiping never worked for me. It's always been too jittery.
@@ -28,8 +28,8 @@ Other than refactoring some code used in the two projects above for my own sake,
   - This allows you to long press (default is the 500ms) to switch from select to ruler, or any other tool to select. My players almost only ever use those two tools, so that's why I picked those.
 - Custom Mouse Interaction Manager
   - I really am unhappy that I had to do this, but I honestly had no choice. PixiJS dispatches TWO events for every touch interaction, which completely broke touch screen support and introduced a race condition that would make drag ruler fail randomly in an infuriating way. To make things worse, and believe me it did, V11 hides the ENTIRE MouseInteractionManager class behind private methods. I wept for days trying to figure out a way to get to those juicy internals, but I was left with this terrible hack.
-  - The MouseInteractionManager is vital to foundry as an application (it's how the mouse works), and it is NOT a part of the stable foundry API. This has been tested using **Version 11.303**. It won't just "probably" break with an upgrade, it WILL break with an upgrade. 
-  - The team developing foundry used to build their API to wag a virtual finger at anyone who wanted to override/wrap the MouseInteractionManager methods. Since V11 they decided to virtually lock it down. You've been warned. 
+  - The MouseInteractionManager is vital to foundry as an application (it's how the mouse works), and it is NOT a part of the stable foundry API. This has been tested using **Version 11.303**. It won't just "probably" break with an upgrade, it WILL break with an upgrade.
+  - The team developing foundry used to build their API to wag a virtual finger at anyone who wanted to override/wrap the MouseInteractionManager methods. Since V11 they decided to virtually lock it down. You've been warned.
 
 ## Wait this doesn't work with my setup. What happen?
 

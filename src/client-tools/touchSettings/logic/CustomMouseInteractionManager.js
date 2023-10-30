@@ -1,8 +1,8 @@
-// I hate that it came to this. I understand why the foundry devs want to make the 
+// I hate that it came to this. I understand why the foundry devs want to make the
 // mouse interaction manager private. They need to protect their codebase so idiots
 // like me won't come in and break mouse interactivity - arguably the most important
 // feature in Foundry. Unfortunately, like all of mankind before me, I was born a beast:
-// too weak willed to prevent myself from exercising power unearned; too cowardly to 
+// too weak willed to prevent myself from exercising power unearned; too cowardly to
 // close vscode.
 // May god have mercy on my soul.
 
@@ -59,7 +59,9 @@ export default class CustomMouseInteractionManager {
      * An optional ControlIcon instance for the object
      * @type {ControlIcon}
      */
-    this.controlIcon = this.options.target ? this.object[this.options.target] : undefined;
+    this.controlIcon = this.options.target
+      ? this.object[this.options.target]
+      : undefined;
 
     /**
      * The view id pertaining to the PIXI Application.
@@ -90,7 +92,7 @@ export default class CustomMouseInteractionManager {
     HOVER: 1,
     CLICKED: 2,
     DRAG: 3,
-    DROP: 4
+    DROP: 4,
   };
 
   /**
@@ -105,7 +107,7 @@ export default class CustomMouseInteractionManager {
     SKIPPED: -2,
     DISALLOWED: -1,
     REFUSED: 1,
-    ACCEPTED: 2
+    ACCEPTED: 2,
   };
 
   /**
@@ -144,7 +146,6 @@ export default class CustomMouseInteractionManager {
    * Activate interactivity for the handled object
    */
   activate() {
-
     // Remove existing listeners
     this.state = this.states.NONE;
     this.target.removeAllListeners();
@@ -157,7 +158,7 @@ export default class CustomMouseInteractionManager {
       rightdown: this.#handleRightDown.bind(this),
       mousemove: this.#handleMouseMove.bind(this),
       mouseup: this.#handleMouseUp.bind(this),
-      contextmenu: this.#handleDragCancel.bind(this)
+      contextmenu: this.#handleDragCancel.bind(this),
     };
 
     // Activate hover events to start the workflow
@@ -231,8 +232,12 @@ export default class CustomMouseInteractionManager {
    */
   #activateHoverEvents() {
     // Disable and re-register mouseover and mouseout handlers
-    this.target.off("pointerover", this.#handlers.mouseover).on("pointerover", this.#handlers.mouseover);
-    this.target.off("pointerout", this.#handlers.mouseout).on("pointerout", this.#handlers.mouseout);
+    this.target
+      .off("pointerover", this.#handlers.mouseover)
+      .on("pointerover", this.#handlers.mouseover);
+    this.target
+      .off("pointerout", this.#handlers.mouseout)
+      .on("pointerout", this.#handlers.mouseout);
   }
 
   /* -------------------------------------------- */
@@ -273,7 +278,11 @@ export default class CustomMouseInteractionManager {
     this.#deactivateDragEvents();
     this.layer.on("pointermove", this.#handlers.mousemove);
     if (!this._dragRight) {
-      canvas.app.view.addEventListener("contextmenu", this.#handlers.contextmenu, { capture: true });
+      canvas.app.view.addEventListener(
+        "contextmenu",
+        this.#handlers.contextmenu,
+        { capture: true },
+      );
     }
   }
 
@@ -285,7 +294,11 @@ export default class CustomMouseInteractionManager {
    */
   #deactivateDragEvents(silent) {
     this.layer.off("pointermove", this.#handlers.mousemove);
-    canvas.app.view.removeEventListener("contextmenu", this.#handlers.contextmenu, { capture: true });
+    canvas.app.view.removeEventListener(
+      "contextmenu",
+      this.#handlers.contextmenu,
+      { capture: true },
+    );
   }
 
   /* -------------------------------------------- */
@@ -299,14 +312,19 @@ export default class CustomMouseInteractionManager {
   #handleMouseOver(event) {
     // Verify if the event can be handled
     const action = "hoverIn";
-    if ((this.state !== this.states.NONE) || !(event.nativeEvent.target.id === this.viewId)) {
+    if (
+      this.state !== this.states.NONE ||
+      !(event.nativeEvent.target.id === this.viewId)
+    ) {
       return this.#debug(action, event, this.handlerOutcomes.SKIPPED);
     }
-    if (!this.can(action, event)) return this.#debug(action, event, this.handlerOutcomes.DISALLOWED);
+    if (!this.can(action, event))
+      return this.#debug(action, event, this.handlerOutcomes.DISALLOWED);
 
     // Invoke the callback function
     const handled = this.callback(action, event);
-    if (!handled) return this.#debug(action, event, this.handlerOutcomes.REFUSED);
+    if (!handled)
+      return this.#debug(action, event, this.handlerOutcomes.REFUSED);
 
     // Advance the workflow state and activate click events
     this.state = Math.max(this.state || 0, this.states.HOVER);
@@ -323,13 +341,18 @@ export default class CustomMouseInteractionManager {
   #handleMouseOut(event) {
     if (event.pointerType === "touch") return; // Ignore Touch events
     const action = "hoverOut";
-    if ((this.state !== this.states.HOVER) || !(event.nativeEvent.target.id === this.viewId)) {
+    if (
+      this.state !== this.states.HOVER ||
+      !(event.nativeEvent.target.id === this.viewId)
+    ) {
       return this.#debug(action, event, this.handlerOutcomes.SKIPPED);
     }
-    if (!this.can(action, event)) return this.#debug(action, event, this.handlerOutcomes.DISALLOWED);
+    if (!this.can(action, event))
+      return this.#debug(action, event, this.handlerOutcomes.DISALLOWED);
 
     // Was the mouse-out event handled by the callback?
-    if (this.callback(action, event) === false) return this.#debug(action, event, this.handlerOutcomes.REFUSED);
+    if (this.callback(action, event) === false)
+      return this.#debug(action, event, this.handlerOutcomes.REFUSED);
 
     // Downgrade the workflow state and deactivate click events
     if (this.state === this.states.HOVER) {
@@ -351,18 +374,22 @@ export default class CustomMouseInteractionManager {
   #handleMouseDown(event) {
     if (event.pointerType === "touch") return;
     if (event.button !== 0) return; // Only support standard left-click
-    if (![this.states.HOVER, this.states.CLICKED, this.states.DRAG].includes(this.state)) return;
+    if (
+      ![this.states.HOVER, this.states.CLICKED, this.states.DRAG].includes(
+        this.state,
+      )
+    )
+      return;
 
     // Determine double vs single click
     const now = Date.now();
-    const isDouble = (now - this.lcTime) <= 250;
+    const isDouble = now - this.lcTime <= 250;
     this.lcTime = now;
 
     // Set the origin point from layer local position
     this.interactionData.origin = event.getLocalPosition(this.layer);
-    
+
     canvas.mousePosition = event.getLocalPosition(canvas.stage);
-    
 
     // Activate a timeout to detect long presses
     if (!isDouble) {
@@ -373,7 +400,8 @@ export default class CustomMouseInteractionManager {
     }
 
     // Dispatch to double and single-click handlers
-    if (isDouble && this.can("clickLeft2", event)) return this.#handleClickLeft2(event);
+    if (isDouble && this.can("clickLeft2", event))
+      return this.#handleClickLeft2(event);
     else return this.#handleClickLeft(event);
   }
 
@@ -385,16 +413,19 @@ export default class CustomMouseInteractionManager {
    */
   #handleClickLeft(event) {
     const action = "clickLeft";
-    if (!this.can(action, event)) return this.#debug(action, event, this.handlerOutcomes.DISALLOWED);
+    if (!this.can(action, event))
+      return this.#debug(action, event, this.handlerOutcomes.DISALLOWED);
     this._dragRight = false;
 
     // Was the left-click event handled by the callback?
-    if (this.callback(action, event) === false) return this.#debug(action, event, this.handlerOutcomes.REFUSED);
+    if (this.callback(action, event) === false)
+      return this.#debug(action, event, this.handlerOutcomes.REFUSED);
 
     // Upgrade the workflow state and activate drag event handlers
     if (this.state === this.states.HOVER) this.state = this.states.CLICKED;
     canvas.currentMouseManager = this;
-    if ((this.state < this.states.DRAG) && this.can("dragStart", event)) this.#activateDragEvents();
+    if (this.state < this.states.DRAG && this.can("dragStart", event))
+      this.#activateDragEvents();
     return this.#debug(action, event);
   }
 
@@ -406,7 +437,8 @@ export default class CustomMouseInteractionManager {
    */
   #handleClickLeft2(event) {
     const action = "clickLeft2";
-    if (this.callback(action, event) === false) return this.#debug(action, event, this.handlerOutcomes.REFUSED);
+    if (this.callback(action, event) === false)
+      return this.#debug(action, event, this.handlerOutcomes.REFUSED);
     return this.#debug(action, event);
   }
 
@@ -435,19 +467,25 @@ export default class CustomMouseInteractionManager {
    * @param {PIXI.FederatedEvent} event
    */
   #handleRightDown(event) {
-    if (![this.states.HOVER, this.states.CLICKED, this.states.DRAG].includes(this.state)) return;
+    if (
+      ![this.states.HOVER, this.states.CLICKED, this.states.DRAG].includes(
+        this.state,
+      )
+    )
+      return;
     if (event.button !== 2) return; // Only support standard left-click
 
     // Determine double vs single click
     const now = Date.now();
-    const isDouble = (now - this.rcTime) <= 250;
+    const isDouble = now - this.rcTime <= 250;
     this.rcTime = now;
 
     // Update event data
     this.interactionData.origin = event.getLocalPosition(this.layer);
 
     // Dispatch to double and single-click handlers
-    if (isDouble && this.can("clickRight2", event)) return this.#handleClickRight2(event);
+    if (isDouble && this.can("clickRight2", event))
+      return this.#handleClickRight2(event);
     else return this.#handleClickRight(event);
   }
 
@@ -459,16 +497,19 @@ export default class CustomMouseInteractionManager {
    */
   #handleClickRight(event) {
     const action = "clickRight";
-    if (!this.can(action, event)) return this.#debug(action, event, this.handlerOutcomes.DISALLOWED);
+    if (!this.can(action, event))
+      return this.#debug(action, event, this.handlerOutcomes.DISALLOWED);
     this._dragRight = true;
 
     // Was the right-click event handled by the callback?
-    if (this.callback(action, event) === false) return this.#debug(action, event, this.handlerOutcomes.REFUSED);
+    if (this.callback(action, event) === false)
+      return this.#debug(action, event, this.handlerOutcomes.REFUSED);
 
     // Upgrade the workflow state and activate drag event handlers
     if (this.state === this.states.HOVER) this.state = this.states.CLICKED;
     canvas.currentMouseManager = this;
-    if ((this.state < this.states.DRAG) && this.can("dragRight", event)) this.#activateDragEvents();
+    if (this.state < this.states.DRAG && this.can("dragRight", event))
+      this.#activateDragEvents();
     return this.#debug(action, event);
   }
 
@@ -480,7 +521,8 @@ export default class CustomMouseInteractionManager {
    */
   #handleClickRight2(event) {
     const action = "clickRight2";
-    if (this.callback(action, event) === false) return this.#debug(action, event, this.handlerOutcomes.REFUSED);
+    if (this.callback(action, event) === false)
+      return this.#debug(action, event, this.handlerOutcomes.REFUSED);
     return this.#debug(action, event);
   }
 
@@ -497,7 +539,7 @@ export default class CustomMouseInteractionManager {
 
     // Limit dragging to 60 updates per second
     const now = Date.now();
-    if ((now - this.dragTime) < canvas.app.ticker.elapsedMS) return;
+    if (now - this.dragTime < canvas.app.ticker.elapsedMS) return;
     this.dragTime = now;
 
     // Update interaction data
@@ -506,14 +548,15 @@ export default class CustomMouseInteractionManager {
 
     // Handling rare case when origin is not defined
     // FIXME: The root cause should be identified and this code removed
-    if (data.origin === undefined) data.origin = new PIXI.Point().copyFrom(data.destination);
+    if (data.origin === undefined)
+      data.origin = new PIXI.Point().copyFrom(data.destination);
 
     // Begin a new drag event
     if (this.state === this.states.CLICKED) {
       const dx = data.destination.x - data.origin.x;
       const dy = data.destination.y - data.origin.y;
       const dz = Math.hypot(dx, dy);
-      const r = this.options.dragResistance || (canvas.dimensions.size / 4);
+      const r = this.options.dragResistance || canvas.dimensions.size / 4;
       if (dz >= r) {
         return this.#handleDragStart(event);
       }
@@ -532,10 +575,15 @@ export default class CustomMouseInteractionManager {
   #handleDragStart(event) {
     clearTimeout(this.constructor.longPressTimeout);
     const action = this._dragRight ? "dragRightStart" : "dragLeftStart";
-    if (!this.can(action, event)) return this.#debug(action, event, this.handlerOutcomes.DISALLOWED);
+    if (!this.can(action, event))
+      return this.#debug(action, event, this.handlerOutcomes.DISALLOWED);
     const handled = this.callback(action, event);
     if (handled) this.state = this.states.DRAG;
-    return this.#debug(action, event, handled ? this.handlerOutcomes.ACCEPTED : this.handlerOutcomes.REFUSED);
+    return this.#debug(
+      action,
+      event,
+      handled ? this.handlerOutcomes.ACCEPTED : this.handlerOutcomes.REFUSED,
+    );
   }
 
   /* -------------------------------------------- */
@@ -547,10 +595,15 @@ export default class CustomMouseInteractionManager {
   #handleDragMove(event) {
     clearTimeout(this.constructor.longPressTimeout);
     const action = this._dragRight ? "dragRightMove" : "dragLeftMove";
-    if (!this.can(action, event)) return this.#debug(action, event, this.handlerOutcomes.DISALLOWED);
+    if (!this.can(action, event))
+      return this.#debug(action, event, this.handlerOutcomes.DISALLOWED);
     const handled = this.callback(action, event);
     if (handled) this.state = this.states.DRAG;
-    return this.#debug(action, event, handled ? this.handlerOutcomes.ACCEPTED : this.handlerOutcomes.REFUSED);
+    return this.#debug(
+      action,
+      event,
+      handled ? this.handlerOutcomes.ACCEPTED : this.handlerOutcomes.REFUSED,
+    );
   }
 
   /* -------------------------------------------- */
@@ -562,7 +615,7 @@ export default class CustomMouseInteractionManager {
   #handleMouseUp(event) {
     clearTimeout(this.constructor.longPressTimeout);
     // If this is a touch hover event, treat it as a drag
-    if ((this.state === this.states.HOVER) && (event.pointerType === "touch")) {
+    if (this.state === this.states.HOVER && event.pointerType === "touch") {
       this.state = this.states.DRAG;
     }
 
@@ -574,8 +627,11 @@ export default class CustomMouseInteractionManager {
 
     // Handling of a degenerate case:
     // When the manager is in a clicked state and that the button is released in another object
-    const emulateHoverOut = (this.state === this.states.CLICKED) && !event.defaultPrevented
-      && (event.target !== this.object) && (event.target?.parent !== this.object);
+    const emulateHoverOut =
+      this.state === this.states.CLICKED &&
+      !event.defaultPrevented &&
+      event.target !== this.object &&
+      event.target?.parent !== this.object;
     if (emulateHoverOut) {
       event.stopPropagation();
       this.state = this.states.HOVER;
@@ -607,10 +663,12 @@ export default class CustomMouseInteractionManager {
    */
   #handleDragDrop(event) {
     const action = this._dragRight ? "dragRightDrop" : "dragLeftDrop";
-    if (!this.can(action, event)) return this.#debug(action, event, this.handlerOutcomes.DISALLOWED);
+    if (!this.can(action, event))
+      return this.#debug(action, event, this.handlerOutcomes.DISALLOWED);
 
     // Was the drag-drop event handled by the callback?
-    if (this.callback(action, event) === false) return this.#debug(action, event, this.handlerOutcomes.DISALLOWED);
+    if (this.callback(action, event) === false)
+      return this.#debug(action, event, this.handlerOutcomes.DISALLOWED);
 
     // Update the workflow state
     this.state = this.states.DROP;
@@ -665,11 +723,13 @@ export default class CustomMouseInteractionManager {
   cancel(event) {
     const action = this._dragRight ? "dragRightCancel" : "dragLeftCancel";
     const endState = this.state;
-    if (endState <= this.states.HOVER) return this.#debug(action, event, this.handlerOutcomes.SKIPPED);
+    if (endState <= this.states.HOVER)
+      return this.#debug(action, event, this.handlerOutcomes.SKIPPED);
 
     // Dispatch a cancellation callback
     if (endState >= this.states.DRAG) {
-      if (this.callback(action, event) === false) return this.#debug(action, event, this.handlerOutcomes.REFUSED);
+      if (this.callback(action, event) === false)
+        return this.#debug(action, event, this.handlerOutcomes.REFUSED);
     }
 
     // Continue a multi-click drag workflow if the default event was prevented in the callback
@@ -700,8 +760,11 @@ export default class CustomMouseInteractionManager {
       const targetName = event.target?.constructor.name;
       const { eventPhase, type, button } = event;
       const state = Object.keys(this.states)[this.state.toString()];
-      let msg = `${name} | ${action} | state:${state} | target:${targetName} | phase:${eventPhase} | type:${type} | `
-        + `btn:${button} | skipped:${outcome <= -2} | allowed:${outcome > -1} | handled:${outcome > 1}`;
+      let msg =
+        `${name} | ${action} | state:${state} | target:${targetName} | phase:${eventPhase} | type:${type} | ` +
+        `btn:${button} | skipped:${outcome <= -2} | allowed:${
+          outcome > -1
+        } | handled:${outcome > 1}`;
       console.debug(msg);
     }
   }
@@ -716,10 +779,13 @@ export default class CustomMouseInteractionManager {
    */
   reset({ interactionData = true, state = true } = {}) {
     if (CONFIG.debug.mouseInteraction) {
-      console.debug(`${this.object.constructor.name} | Reset | interactionData:${interactionData} | state:${state}`);
+      console.debug(
+        `${this.object.constructor.name} | Reset | interactionData:${interactionData} | state:${state}`,
+      );
     }
     if (interactionData) this.interactionData = {};
-    if (state) this.state = CustomMouseInteractionManager.INTERACTION_STATES.NONE;
+    if (state)
+      this.state = CustomMouseInteractionManager.INTERACTION_STATES.NONE;
   }
 
   /* -------------------------------------------- */
@@ -749,7 +815,7 @@ export default class CustomMouseInteractionManager {
           const msg = `event.data.${k} is deprecated in favor of event.interactionData.${k}.`;
           foundry.utils.logCompatibilityWarning(msg, { since: 11, until: 12 });
           this.interactionData[k] = value;
-        }
+        },
       });
     }
   }
@@ -769,35 +835,34 @@ export const canvasCallbacks = (canvas) => {
     dragRightMove: canvas._onDragRightMove.bind(canvas),
     dragRightDrop: canvas._onDragRightDrop.bind(canvas),
     dragRightCancel: null,
-    longPress: canvas._onLongPress.bind(canvas)
-  }
+    longPress: canvas._onLongPress.bind(canvas),
+  };
 };
 
-function _onDragLeftCancel (event) {
+function _onDragLeftCancel(event) {
   const layer = canvas.activeLayer;
   const tool = game.activeTool;
 
   // Don't cancel ruler measurement
   const ruler = canvas.controls.ruler;
-  if ( ruler.active && ruler.isDragRuler ) return;
-  if ( ruler.active ) {
+  if (ruler.active && ruler.isDragRuler) return;
+  if (ruler.active) {
     event.preventDefault();
     return true;
   }
 
   // Clear selection
   const isSelect = ["select", "target"].includes(tool);
-  if ( isSelect ) {
+  if (isSelect) {
     canvas.controls.select.clear();
     return true;
   }
 
   // Dispatch the event to the active layer
-  if ( layer instanceof InteractionLayer ) return layer._onDragLeftCancel(event);
+  if (layer instanceof InteractionLayer) return layer._onDragLeftCancel(event);
 }
 
-function _onDragLeftDrop (event) {
-
+function _onDragLeftDrop(event) {
   // Extract event data
   const coords = event.interactionData.coords;
   const tool = game.activeTool;
@@ -805,23 +870,30 @@ function _onDragLeftDrop (event) {
 
   // Conclude a measurement event if we aren't holding the CTRL key
   const ruler = canvas.controls.ruler;
-  if ( ruler.active && ruler.isDragRuler ) return;
-  if ( ruler.active ) {
-    if ( game.keyboard.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL) ) event.preventDefault();
+  if (ruler.active && ruler.isDragRuler) return;
+  if (ruler.active) {
+    if (game.keyboard.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL))
+      event.preventDefault();
     return ruler._onMouseUp(event);
   }
 
   // Conclude a select event
   const isSelect = ["select", "target"].includes(tool);
-  if ( isSelect && canvas.controls.select.active && (layer instanceof PlaceablesLayer) ) {
+  if (
+    isSelect &&
+    canvas.controls.select.active &&
+    layer instanceof PlaceablesLayer
+  ) {
     canvas.controls.select.clear();
     canvas.controls.select.active = false;
     const releaseOthers = !event.shiftKey;
-    if ( !coords ) return;
-    if ( tool === "select" ) return layer.selectObjects(coords, {releaseOthers});
-    else if ( tool === "target") return layer.targetObjects(coords, {releaseOthers});
+    if (!coords) return;
+    if (tool === "select")
+      return layer.selectObjects(coords, { releaseOthers });
+    else if (tool === "target")
+      return layer.targetObjects(coords, { releaseOthers });
   }
 
   // Dispatch the event to the active layer
-  if ( layer instanceof InteractionLayer ) layer._onDragLeftDrop(event);
+  if (layer instanceof InteractionLayer) layer._onDragLeftDrop(event);
 }
