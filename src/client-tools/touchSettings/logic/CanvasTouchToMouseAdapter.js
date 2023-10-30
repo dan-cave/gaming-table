@@ -4,6 +4,7 @@ import TouchToMouseAdapter from './TouchToMouseAdapter'
 class CanvasTouchToMouseAdapter extends TouchToMouseAdapter {
   constructor(canvas) {
     super(canvas);
+    console.log(`Creating canvas mouse adapter for ${canvas}`);
     this.touchCount = 0;
     this.lastTouchTime = 0;
     this.inTimeout = false;

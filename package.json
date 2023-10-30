@@ -1,7 +1,7 @@
 {
   "name": "gaming-table",
-  "version": "1.1.0",
-  "description": "Adds touch screen support and GM tools to FoundryVTT with hammerjs",
+  "version": "1.2.0",
+  "description": "Adds touch screen support and tools to enhance touch support to FoundryVTT",
   "main": "src/gaming-table.js",
   "scripts": {
     "build": "webpack --config ./webpack.config.js --mode production",
@@ -13,15 +13,19 @@
     "url": "git+https://github.com/dan-cave/gaming-table.git"
   },
   "keywords": [
-    "FoundryVTT"
+    "FoundryVTT",
+    "Touchscreen",
+    "Touch",
+    "Abomination"
   ],
   "author": "Dan Lee <dan@danlee.dev>",
-  "license": "ISC",
+  "license": "Beerware",
   "bugs": {
     "url": "https://github.com/dan-cave/gaming-table/issues"
   },
   "homepage": "https://github.com/dan-cave/gaming-table#readme",
   "devDependencies": {
+    "prettier": "^3.0.3",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
   }

@@ -8,7 +8,7 @@
       "email": "dan@danlee.dev"
     }
   ],
-  "version": "1.1.0",
+  "version": "1.2.0",
   "compatibility": {
     "minimum": "11",
     "verified": "11.302"
@@ -36,14 +36,18 @@
             "minimum": "1.0.0.0",
             "verified": "1.12.6.0"
         }
+      },
+      {
+        "id": "socketlib",
+        "type": "module"
       }
     ]
   },
   "socket": true,
   "url": "https://github.com/dan-cave/gaming-table",
-  "download": "https://github.com/dan-cave/gaming-table/releases/download/v1.1.0/gaming-table-v1.1.0.zip",
+  "download": "https://github.com/dan-cave/gaming-table/releases/download/v1.1.0/gaming-table-v1.2.0.zip",
   "manifest": "https://raw.githubusercontent.com/dan-cave/gaming-table/master/module.json",
-  "license": "https://www.gnu.org/licenses/gpl-3.0.en.html",
+  "license": "https://raw.githubusercontent.com/dan-cave/gaming-table/master/License.txt",
   "readme": "https://raw.githubusercontent.com/dan-cave/gaming-table/master/Readme.md",
   "bugs": "https://github.com/dan-cave/gaming-table/issues"
 }
