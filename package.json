@@ -1,6 +1,6 @@
 {
   "name": "gaming-table",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "description": "Adds touch screen support and tools to enhance touch support to FoundryVTT",
   "main": "src/gaming-table.js",
   "scripts": {
