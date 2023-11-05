@@ -54,9 +54,10 @@ class CanvasTouchToMouseAdapter extends TouchToMouseAdapter {
   }
 
   handleTouchMove(event) {
-    clearTimeout(this.longPressTimeout);
-    this.clearTouchCount();
-
+    if (canvas.mouseInteractionManager.isDragging || this.isDraggingPlaceableObjects()) {
+      clearTimeout(this.longPressTimeout);
+      this.clearTouchCount();
+    }
     this.updateActiveTouches(event);
     this.forwardTouches(event);
   }
@@ -88,6 +89,18 @@ class CanvasTouchToMouseAdapter extends TouchToMouseAdapter {
 
   clearTouchCount() {
     this.touchCount = 0;
+  }
+
+  // Utility class to determine whether controlled PlaceableObjects have a DRAG (3) interaction state. 
+  // Dragging PlaceableObjects does not update the mouseInteractionManager's internal state for some reason
+  // Which is how I determine whether any other kind of drag event is happening
+  isDraggingPlaceableObjects() {
+
+    let isDragging = false;
+    canvas.activeLayer.controlledObjects.forEach(placeableObject => {
+      isDragging = isDragging || placeableObject.interactionState == canvas.mouseInteractionManager.states.DRAG;
+    });
+    return isDragging;
   }
 }
 
