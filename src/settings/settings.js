@@ -17,6 +17,7 @@ export const LONG_TOUCH_TIMEOUT = "longTouchTimeout";
 export const LONG_TOUCH_TOGGLE = "longTouchToggle";
 
 export const ZOOM_VALUE = "zoomValue";
+export const ZOOM_PAN_TOGGLE = "zoomPanToggle";
 
 export const BUTTON_SCALE_PX = "buttonScalepx";
 
@@ -51,6 +52,14 @@ export function registerSettings() {
     hint: game.i18n.localize("gamingtable.settings.longTouchToggle.hint"),
     scope: "client",
     default: false,
+    type: Boolean,
+    config: true,
+  });
+  game.settings.register(MODULE_NAME, ZOOM_PAN_TOGGLE, {
+    name: game.i18n.localize("gamingtable.settings.zoomPanToggle.name"),
+    hint: game.i18n.localize("gamingtable.settings.zoomPanToggle.hint"),
+    scope: "client",
+    default: true,
     type: Boolean,
     config: true,
   });
