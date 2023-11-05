@@ -21,7 +21,7 @@
 ## Specifications
 
   - Module Version: 
-  - Foundry Version:
+  - Foundry Version (Please include build):
   - Browser:
   - Touch Input Device:
   - Are you using touch emulation?:
