@@ -6,9 +6,9 @@
   "scripts": {
     "build": "webpack --config ./webpack.config.js --mode production",
     "prettier": "prettier **",
-    "release:major": "node ./automation/release.js --major",
-    "release:minor": "node ./automation/release.js --minor",
-    "release:bugfix": "node ./automation/release.js --bugfix",
+    "release:major": "node ./automation/release.mjs --major",
+    "release:minor": "node ./automation/release.mjs --minor",
+    "release:bugfix": "node ./automation/release.mjs --bugfix",
     "dev": "webpack --config webpack.config.js --watch --mode development --devtool inline-cheap-module-source-map",
     "test": "\"echo \\\"No tests lol\\\" && exit 1\""
   },
