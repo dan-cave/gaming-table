@@ -19,6 +19,8 @@ import {
 
 export const initClientTools = () => {
   Hooks.once("init", async () => {
+    globalThis.ontouchstart = null;
+
     initDisableCharacterSheets();
     initEnlargeDoorsTool();
     initEnlargeButtonTool();
